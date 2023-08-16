@@ -1,3 +1,13 @@
+//hide buttons 
+
+button[title="Connectable lines & curves"],
+button[title="Line"],
+button[title="Free draw"],
+button[title="Canvas options"]{
+    display: none;
+}
+
+
 .canvas-holder {
   position: fixed;
   left: 64px;
