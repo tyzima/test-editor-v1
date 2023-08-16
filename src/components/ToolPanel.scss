@@ -1,9 +1,9 @@
 .toolpanel {
   position: absolute;
-  background-color: #ffffff;
+  background-color: #f9f9f9;
   width: 300px;
   height: 100%;
-  border: 2px solid #ededed;
+  border: 1px solid #ddd;
   transition: all 0.4s;
   box-sizing: border-box;
   padding: 20px;
@@ -11,8 +11,6 @@
   text-align: left;
   font-size: 13px;
   color: #777;
-  border-top-right-radius: 30px;
-}
 
   .holder {
     overflow-x: hidden;
@@ -28,7 +26,7 @@
     height: 70px;
     right: -25px;
     top: 33%;
-    background-color: #ffffff;
+    background-color: #f9f9f9;
     cursor: pointer;
     border: 1px solid #ddd;
     border-left: 0;
@@ -196,3 +194,4 @@
     width: 32px;
     height: 32px;
   }
+}
