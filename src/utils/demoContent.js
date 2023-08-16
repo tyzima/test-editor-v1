@@ -3,7 +3,17 @@
  */
 const demoContent = (canvas, fabric) => {
 
+  const alignObject = (pos) => {
+    // ... [the complete alignObject function as you provided]
+  };
 
+  const tbox = new fabric.Textbox('Lorem ipsum dolor sit amet', {
+    left: 450, top: 220, width: 130, fontSize: 20, fontFamily: "'Open Sans', sans-serif"
+  });
+  tbox.setSelectionStyles({ fontWeight: 'bold', fontStyle: 'italic' }, 6, 11);
+  tbox.setSelectionStyles({ fontFamily: 'Impact', fill: 'red' }, 18, 21);
+  tbox.setControlsVisibility({ 'mb': false });
+  canvas.add(tbox);
 
   // Capture URL parameters
   const params = new URLSearchParams(window.location.search);
@@ -17,22 +27,19 @@ const demoContent = (canvas, fabric) => {
         const scaleFactor = 400 / oImg.height;
         oImg.scale(scaleFactor);
         
-    // Set the position to the center of the canvas
-// Set the origin of the image to its center
-oImg.set({
-    originX: 'center',
-    originY: 'center'
-});
+        // Set the position to the center of the canvas vertically
+        oImg.set({
+            top: (canvas.height - oImg.height * oImg.scaleY) / 2
+        });
 
-// Position the image at the center of the canvas
-oImg.set({
-    left: canvas.width / 2,
-    top: canvas.height / 2
-});
-
-
-
+        // Add the image to the canvas
         canvas.add(oImg);
+        
+        // Set the image as the active selection
+        canvas.setActiveObject(oImg);
+
+        // Use the alignObject function to center the image horizontally
+        alignObject('center-h');
 
     }, { crossOrigin: 'Anonymous' });
   }
