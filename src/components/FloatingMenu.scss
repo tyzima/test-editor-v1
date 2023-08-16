@@ -1,3 +1,10 @@
+button[title="Flip horizontally"],
+button[title="Flip vertically"] {
+    display: none;
+}
+
+
+
 .floating-menu {
   position: absolute;
   left: 100px;
