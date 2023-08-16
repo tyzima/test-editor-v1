@@ -56,19 +56,19 @@ const textBoxDrawing = (fabricCanvas, fabric) => {
 
     isDrawingText = false;
 
-    // get final rect coords and replace it with textbox
-    let textbox = new fabric.Textbox(__('Your text goes here...'), {
-      left: textboxRect.left,
-      top: textboxRect.top,
-      width: textboxRect.width < 80 ? 80 : textboxRect.width,
-      fontSize: 18,
-      fontFamily: "'Open Sans', sans-serif",
-      uId: Date.now() + Math.random()
-    });
-    fabricCanvas.remove(textboxRect);
-    fabricCanvas.add(textbox).setActiveObject(textbox);
-    textbox.setControlsVisibility({ 'mb': false });
-    fabricCanvas.trigger('object:modified');
+   // get final rect coords and replace it with textbox
+let textbox = new fabric.Textbox('LACROSSE', {  // Changed the default text
+    left: textboxRect.left,
+    top: textboxRect.top,
+    width: 350,  // Set the width to 350px
+    fontSize: 18,
+    fontFamily: "'Open Sans', sans-serif",
+    uId: Date.now() + Math.random()
+});
+fabricCanvas.remove(textboxRect);
+fabricCanvas.add(textbox).setActiveObject(textbox);
+textbox.setControlsVisibility({ 'mb': false });
+fabricCanvas.trigger('object:modified');
   });
 
 }
