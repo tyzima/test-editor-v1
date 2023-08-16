@@ -21,7 +21,7 @@ const FabricCanvas = (props) => {
 
 
     // create instance
-    const fabricCanvas = new fabric.Canvas('c').setDimensions({ width: 640, height: 480 })
+    const fabricCanvas = new fabric.Canvas('c').setDimensions({ width: 700, height: 500 })
     fabricCanvas.originalW = fabricCanvas.width
     fabricCanvas.originalH = fabricCanvas.height
 
