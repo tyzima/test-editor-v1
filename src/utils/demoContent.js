@@ -7,14 +7,6 @@ const demoContent = (canvas, fabric) => {
     // ... [the complete alignObject function as you provided]
   };
 
-  const tbox = new fabric.Textbox('Lorem ipsum dolor sit amet', {
-    left: 450, top: 220, width: 130, fontSize: 20, fontFamily: "'Open Sans', sans-serif"
-  });
-  tbox.setSelectionStyles({ fontWeight: 'bold', fontStyle: 'italic' }, 6, 11);
-  tbox.setSelectionStyles({ fontFamily: 'Impact', fill: 'red' }, 18, 21);
-  tbox.setControlsVisibility({ 'mb': false });
-  canvas.add(tbox);
-
   // Capture URL parameters
   const params = new URLSearchParams(window.location.search);
 
