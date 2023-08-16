@@ -10,8 +10,7 @@ button[title="Flip vertically"] {
   left: 100px;
   top: 100px;
   background-color: #fff;
-  border: 1px solid #cacaca;
-  box-shadow: 0 1px 4px 0 rgba(50, 50, 50, 0.2);
+  border: 2px solid #ededed;
 
   div {
     cursor: pointer;
@@ -19,7 +18,7 @@ button[title="Flip vertically"] {
     padding-right: 20px;
     padding-bottom: 5px;
     padding-top: 5px;
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 2px solid #ededed;
   }
 
   div:hover {
