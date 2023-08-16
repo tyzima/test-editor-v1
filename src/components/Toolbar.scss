@@ -28,8 +28,8 @@
   button:hover,
   button.active {
     opacity: 1;
-    border-top: 2px solid #ededed;
-    border-bottom: 2px solid #ededed;
+    border-top: 0px solid #ededed;
+    border-bottom: 1px solid #ededed;
     box-shadow: inset 5px 0 10px 0 rgba(50, 50, 50, 0.1);
   }
 
