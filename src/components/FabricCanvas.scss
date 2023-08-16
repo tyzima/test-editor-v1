@@ -10,6 +10,7 @@ button[title="Canvas options"]{
 
 .canvas-holder {
   position: fixed;
+  background:linear-gradient(45deg, #EEEEEE, #FAF8F9, #FFFFFF);
   left: 64px;
   top: 92px;
   width: calc(100% - 64px);
@@ -22,8 +23,8 @@ button[title="Canvas options"]{
 .canvas-container {
   margin: 50px;
   display: inline-block;
-  border: 1px solid #ccc;
-  background-color: #FEFEFE;
+  border: 2px solid #ededed;
+  background-color: #ededed;
   background-size: 30px 30px;
   background-position: 0 0, 15px 15px;
   box-sizing: content-box;
