@@ -18,10 +18,18 @@ const demoContent = (canvas, fabric) => {
         oImg.scale(scaleFactor);
         
     // Set the position to the center of the canvas
+// Set the origin of the image to its center
 oImg.set({
-    left: (canvas.width - oImg.width * oImg.scaleX) / 2,
-    top: (canvas.height - oImg.height * oImg.scaleY) / 2
+    originX: 'center',
+    originY: 'center'
 });
+
+// Position the image at the center of the canvas
+oImg.set({
+    left: canvas.width / 2,
+    top: canvas.height / 2
+});
+
 
 
         canvas.add(oImg);
