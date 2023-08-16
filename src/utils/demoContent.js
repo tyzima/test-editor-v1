@@ -46,14 +46,32 @@ if (params.has('image')) {
 }
 
   // Check if an "svg" parameter exists
-  if (params.has('svg')) {
+if (params.has('svg')) {
     const svgUrl = params.get('svg');
     fabric.loadSVGFromURL(svgUrl, function(objects) {
         const obj = fabric.util.groupSVGElements(objects);
-        obj.set({ left: 230, top: 190 });
-        canvas.add(obj).renderAll();
+
+        // Scale if necessary (similar to the image scaling logic, if needed)
+        // Here, I'm just replicating the image's scaling logic for reference. 
+        // If your SVG doesn't need to be 400px tall, you can adjust or remove this.
+        const scaleFactor = 400 / obj.height;
+        obj.scale(scaleFactor);
+
+        // Adjust the position
+        obj.set({
+            left: (canvas.width - obj.width * obj.scaleX) / 2 - 120,
+            top: (canvas.height - obj.height * obj.scaleY) / 2
+        });
+
+        canvas.add(obj);
+        canvas.setActiveObject(obj);
+
+        // Use the alignObject function to center the SVG vertically
+        alignObject('center-v');
+
     });
-  }
+}
+
 }
 
 export default demoContent
