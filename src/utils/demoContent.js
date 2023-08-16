@@ -27,11 +27,6 @@ const demoContent = (canvas, fabric) => {
         const scaleFactor = 400 / oImg.height;
         oImg.scale(scaleFactor);
         
-        // Set the position to the center of the canvas vertically
-        oImg.set({
-            top: (canvas.height - oImg.height * oImg.scaleY) / 2
-        });
-
         // Add the image to the canvas
         canvas.add(oImg);
         
@@ -40,6 +35,9 @@ const demoContent = (canvas, fabric) => {
 
         // Use the alignObject function to center the image horizontally
         alignObject('center-h');
+        
+        // Use the alignObject function to center the image vertically
+        alignObject('center-v');
 
     }, { crossOrigin: 'Anonymous' });
   }
