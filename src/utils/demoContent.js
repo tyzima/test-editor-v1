@@ -18,8 +18,8 @@ const demoContent = (canvas, fabric) => {
   // Capture URL parameters
   const params = new URLSearchParams(window.location.search);
 
-  // Check if an "image" parameter exists
-  if (params.has('image')) {
+// Check if an "image" parameter exists
+if (params.has('image')) {
     const imageUrl = params.get('image');
     fabric.Image.fromURL(imageUrl, function(oImg) {
         
@@ -27,20 +27,23 @@ const demoContent = (canvas, fabric) => {
         const scaleFactor = 400 / oImg.height;
         oImg.scale(scaleFactor);
         
+        // Adjust the position
+        oImg.set({
+            left: (canvas.width - oImg.width * oImg.scaleX) / 2 - 120, // Subtract 120 from the horizontal centering
+            top: (canvas.height - oImg.height * oImg.scaleY) / 2
+        });
+
         // Add the image to the canvas
         canvas.add(oImg);
         
         // Set the image as the active selection
         canvas.setActiveObject(oImg);
 
-        // Use the alignObject function to center the image horizontally
-        alignObject('center-h');
-        
         // Use the alignObject function to center the image vertically
         alignObject('center-v');
 
     }, { crossOrigin: 'Anonymous' });
-  }
+}
 
   // Check if an "svg" parameter exists
   if (params.has('svg')) {
