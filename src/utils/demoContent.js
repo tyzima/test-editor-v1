@@ -31,7 +31,7 @@ if (params.has('image')) {
 
         // Adjust the position
         oImg.set({
-            left: (canvas.width - oImg.width * oImg.scaleX) / 2 - 120,
+            left: (canvas.width - oImg.width * oImg.scaleX) / 2,
             top: (canvas.height - oImg.height * oImg.scaleY) / 2
         });
 
@@ -59,7 +59,7 @@ if (params.has('svg')) {
 
         // Adjust the position
         obj.set({
-            left: (canvas.width - obj.width * obj.scaleX) / 2 - 120,
+            left: (canvas.width - obj.width * obj.scaleX) / 2,
             top: (canvas.height - obj.height * obj.scaleY) / 2
         });
 
