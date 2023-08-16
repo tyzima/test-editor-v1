@@ -1,7 +1,7 @@
 .toolbar {
   width: 64px;
   line-height: 0;
-  border-right: 1px solid #ccc;
+  border-right: 2px solid #ededed;
   background-color: #fff;
 }
 
@@ -16,8 +16,8 @@
 
     img,
     svg {
-      width: 22px;
-      height: 22px;
+      width: 19px;
+      height: 19px;
     }
   }
 
@@ -28,8 +28,8 @@
   button:hover,
   button.active {
     opacity: 1;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    border-top: 2px solid #ededed;
+    border-bottom: 2px solid #ededed;
     box-shadow: inset 5px 0 10px 0 rgba(50, 50, 50, 0.1);
   }
 
@@ -40,6 +40,6 @@
     margin-top: 15px;
     margin-bottom: 15px;
     clear: both;
-    background-color: #ddd;
+    background-color: #ededed;
   }
 
