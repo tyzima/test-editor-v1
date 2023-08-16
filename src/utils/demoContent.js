@@ -17,11 +17,12 @@ const demoContent = (canvas, fabric) => {
         const scaleFactor = 400 / oImg.height;
         oImg.scale(scaleFactor);
         
-        // Set the position to the center of the canvas
-        oImg.set({
-            left: canvas.width / 2 - oImg.width * oImg.scaleX / 2,
-            top: canvas.height / 2 - oImg.height * oImg.scaleY / 2
-        });
+    // Set the position to the center of the canvas
+oImg.set({
+    left: (canvas.width - oImg.width * oImg.scaleX) / 2,
+    top: (canvas.height - oImg.height * oImg.scaleY) / 2
+});
+
 
         canvas.add(oImg);
 
