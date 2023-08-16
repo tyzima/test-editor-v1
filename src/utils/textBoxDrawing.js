@@ -60,7 +60,7 @@ let textbox = new fabric.Textbox(__('LACROSSE'), {
     left: textboxRect.left,
     top: textboxRect.top,
     width: textboxRect.width < 80 ? 280 : textboxRect.width,
-    fontSize: 40,
+    fontSize: 50,
     fontFamily: "'Oswald', sans-serif",
     textAlign: 'center',  // This aligns the text to the center
     uId: Date.now() + Math.random()
