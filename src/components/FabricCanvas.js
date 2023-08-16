@@ -28,12 +28,12 @@ const FabricCanvas = (props) => {
 
 
     // set up selection style
-    fabric.Object.prototype.transparentCorners = false;
-    fabric.Object.prototype.cornerStyle = 'circle';
-    fabric.Object.prototype.borderColor = '#C00000';
-    fabric.Object.prototype.cornerColor = '#C00000';
-    fabric.Object.prototype.cornerStrokeColor = '#FFF';
-    fabric.Object.prototype.padding = 0;
+fabric.Object.prototype.transparentCorners = false;
+fabric.Object.prototype.cornerStyle = 'circle';
+fabric.Object.prototype.borderColor = '#333';           // Dark grey color
+fabric.Object.prototype.cornerColor = '#333';           // Dark grey color
+fabric.Object.prototype.cornerStrokeColor = '#FFF';     // Keeping this white, adjust if needed
+fabric.Object.prototype.padding = 0;
 
 
 
