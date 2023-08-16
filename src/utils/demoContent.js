@@ -14,9 +14,9 @@ const demoContent = (canvas, fabric) => {
 if (params.has('image')) {
     const imageUrl = params.get('image');
     fabric.Image.fromURL(imageUrl, function(oImg) {
-        
-        const widthScaleFactor = canvas.width / oImg.width;
-        const heightScaleFactor = canvas.height / oImg.height;
+
+        const widthScaleFactor = 0.6 * canvas.width / oImg.width;
+        const heightScaleFactor = 0.6 * canvas.height / oImg.height;
         const scaleFactor = Math.min(widthScaleFactor, heightScaleFactor);
 
         oImg.scale(scaleFactor);
@@ -29,7 +29,7 @@ if (params.has('image')) {
 
         canvas.add(oImg);
         canvas.setActiveObject(oImg);
-        
+
         // Use the alignObject function to center the image vertically
         alignObject('center-v');
 
@@ -37,14 +37,14 @@ if (params.has('image')) {
 }
 
 
-  // Check if an "svg" parameter exists
+// Check if an "svg" parameter exists
 if (params.has('svg')) {
     const svgUrl = params.get('svg');
     fabric.loadSVGFromURL(svgUrl, function(objects) {
         const obj = fabric.util.groupSVGElements(objects);
 
-        const widthScaleFactor = canvas.width / obj.width;
-        const heightScaleFactor = canvas.height / obj.height;
+        const widthScaleFactor = 0.6 * canvas.width / obj.width;
+        const heightScaleFactor = 0.6 * canvas.height / obj.height;
         const scaleFactor = Math.min(widthScaleFactor, heightScaleFactor);
 
         obj.scale(scaleFactor);
