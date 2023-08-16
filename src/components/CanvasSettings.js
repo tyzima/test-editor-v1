@@ -15,8 +15,8 @@ import GradientPicker from './GradientPicker';
 const CanvasSettings = ({ canvas }) => {
 
   const [canvasSettings, setCanvasSettings] = useState({
-    width: 640,
-    height: 480,
+    width: 850,
+    height: 700,
     keepAspectRatio: false,
     color: 'rgba(255, 255, 255, 0)',
     gradient: {
