@@ -255,24 +255,26 @@ const SelectionTextSettings = ({ canvas, activeSelection, isTextEditing }) => {
       <div>&nbsp;</div>
 
 
-      <div className="setting">
-        <div className="label">{__('Font family')}</div><div className="function">
-          <select value={fontFamily} onChange={(e) => handleFamilyChange(e)}>
+<div className="setting">
+    <div className="label">{__('Font family')}</div>
+    <div className="function">
+        <select value={fontFamily} onChange={(e) => handleFamilyChange(e)}>
             <option value=""></option>
-            <option value="'Open Sans', sans-serif">Open Sans</option>
-            <option value="'Oswald', sans-serif">Oswald</option>
-            <option value="'Playfair Display', serif">Playfair Display</option>
-            <option value="'Cormorant Garamond', serif">Cormorant Garamond</option>
-            <option value="Impact, Charcoal, sans-serif">Impact</option>
-            <option value="'Lucida Console', Monaco, monospace">Lucida Console</option>
-            <option value="'Comic Sans MS', 'Comic Sans', cursive, sans-serif">Comic Sans</option>
-            <option value="'Dancing Script', cursive">Dancing Script</option>
-            <option value="'Indie Flower', cursive">Indie Flower</option>
-            <option value="'Amatic SC', cursive">Amatic SC</option>
-            <option value="'Permanent Marker', cursive">Permanent Marker</option>
-          </select>
-        </div>
-      </div>
+            <option value="'Open Sans', sans-serif" className="open-sans">Open Sans</option>
+            <option value="'Oswald', sans-serif" className="oswald">Oswald</option>
+            <option value="'Playfair Display', serif" className="playfair-display">Playfair Display</option>
+            <option value="'Cormorant Garamond', serif" className="cormorant-garamond">Cormorant Garamond</option>
+            <option value="Impact, Charcoal, sans-serif" className="impact">Impact</option>
+            <option value="'Lucida Console', Monaco, monospace" className="lucida-console">Lucida Console</option>
+            <option value="'Comic Sans MS', 'Comic Sans', cursive, sans-serif" className="comic-sans">Comic Sans</option>
+            <option value="'Dancing Script', cursive" className="dancing-script">Dancing Script</option>
+            <option value="'Indie Flower', cursive" className="indie-flower">Indie Flower</option>
+            <option value="'Amatic SC', cursive" className="amatic-sc">Amatic SC</option>
+            <option value="'Permanent Marker', cursive" className="permanent-marker">Permanent Marker</option>
+        </select>
+    </div>
+</div>
+
 
       <div className="setting">
         <div className="label">{__('Font size')}</div><div className="function">
