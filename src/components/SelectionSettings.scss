@@ -37,4 +37,18 @@
   &.visible {
     display: inline-block;
   }
+
+  .color-swatch {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-right: 5px;
+    cursor: pointer;
+    border: 1px solid #cccccc;
+}
+
+.color-swatch:hover {
+    border: 1px solid #000000;
+}
+
 }
