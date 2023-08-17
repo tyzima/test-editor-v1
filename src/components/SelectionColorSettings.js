@@ -1,60 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import __ from './../utils/translation';
 
 const SelectionColorSettings = ({ canvas, activeSelection }) => {
+    const [detectedColors, setDetectedColors] = useState([]);
 
-    const [fillColor, setFillColor] = useState('');
-    const swatches = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#FFFFFF', '#000000']; // Add more colors as needed
-
-    const handleColorChange = (color) => {
-        if (activeSelection.type === 'group') {
-            activeSelection.getObjects().forEach(obj => {
-                obj.set({ fill: color });
+    // Extract distinct colors from the selected object
+    const extractColors = (object) => {
+        let colors = [];
+        if (object.type === 'group') {
+            object._objects.forEach(subObject => {
+                if (subObject.fill && !colors.includes(subObject.fill)) {
+                    colors.push(subObject.fill);
+                }
             });
         } else {
-            activeSelection.set({ fill: color });
+            if (object.fill) {
+                colors.push(object.fill);
+            }
         }
-        setFillColor(color);
-        canvas.renderAll();
+        setDetectedColors(colors);
     };
 
-    const handleInputChange = (e) => {
-        const color = e.target.value;
-        handleColorChange(color);
-    };
+    useEffect(() => {
+        if (activeSelection) {
+            extractColors(activeSelection);
+        }
+    }, [activeSelection]);
 
-    const ungroup = () => {
+    const handleColorChange = (originalColor, newColor) => {
         if (activeSelection.type === 'group') {
-            activeSelection.destroy();
-            canvas.renderAll();
+            activeSelection._objects.forEach(subObject => {
+                if (subObject.fill === originalColor) {
+                    subObject.set('fill', newColor);
+                }
+            });
+        } else {
+            if (activeSelection.fill === originalColor) {
+                activeSelection.set('fill', newColor);
+            }
         }
+        canvas.renderAll();
+        canvas.trigger('object:modified');
     };
 
     return (
-        <div>
-            {activeSelection && (
-                <div className="setting">
-                    <div className="label">{__('Fill color')}</div>
-                    <div className="function">
-                        <input
-                            type="color"
-                            value={fillColor}
-                            onChange={handleInputChange}
-                        />
-                        {swatches.map((color, index) => (
-                            <div 
-                                key={index}
-                                className="color-swatch"
-                                style={{ backgroundColor: color }}
-                                onClick={() => handleColorChange(color)}
-                            ></div>
-                        ))}
-                    </div>
+        <div className="color-settings">
+            {detectedColors.map(color => (
+                <div key={color} className="color-swatch">
+                    <div className="color-display" style={{ backgroundColor: color }}></div>
+                    <input type="color" value={color} onChange={(e) => handleColorChange(color, e.target.value)} />
                 </div>
-            )}
-            {activeSelection && activeSelection.type === 'group' && (
-                <button onClick={ungroup}>{__('Ungroup paths')}</button>
-            )}
+            ))}
         </div>
     );
 }
