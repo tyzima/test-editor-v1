@@ -1,93 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { fabric } from 'fabric';
 
-import delayedAction from './../utils/delayedAction';
-import { gradToStateObj, stateObjToGrad } from './../utils/gradientTools';
 import __ from './../utils/translation';
-
-import { Tabs, Tab } from './Tabs';
-import { ChromePicker } from 'react-color';
-import GradientPicker from './GradientPicker';
-
-
 
 const SelectionColorSettings = ({ canvas, activeSelection }) => {
 
-  const [color, setColor] = useState('rgba(255, 255, 0, 1)')
-  const [gradient, setGradient] = useState({
-      type: 'linear',
-      angle: 90,
-      colorStops: [
-        { offset: 0, color: 'rgba(0, 0, 0, 1)', id: 0 },
-        { offset: 1, color: 'rgba(255, 0, 0, 1)', id: 1 }
-      ],
-      reset: true
-    })
+    const [fillColor, setFillColor] = useState('');
+    const swatches = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF', '#FFFFFF', '#000000']; // Add more colors as needed
 
+    const handleColorChange = (color) => {
+        if (activeSelection.type === 'group') {
+            activeSelection.getObjects().forEach(obj => {
+                obj.set({ fill: color });
+            });
+        } else {
+            activeSelection.set({ fill: color });
+        }
+        setFillColor(color);
+        canvas.renderAll();
+    };
 
-  // load selected object's color settings on panel load
-  useEffect(() => {
+    const handleInputChange = (e) => {
+        const color = e.target.value;
+        handleColorChange(color);
+    };
 
-    if (!activeSelection.fill) return
+    const ungroup = () => {
+        if (activeSelection.type === 'group') {
+            activeSelection.destroy();
+            canvas.renderAll();
+        }
+    };
 
-    // obj has color
-    if (!activeSelection.fill.colorStops) {
-      let color = new fabric.Color(activeSelection.fill);
-      let colorRgba = color.getSource()
-      setColor(`rgba(${colorRgba[0]}, ${colorRgba[1]}, ${colorRgba[2]}, ${colorRgba[3]})`)
-    }
-
-
-    // obj has gradient
-    if (activeSelection.fill.colorStops) {
-      let loadedGradient = gradToStateObj(activeSelection.fill, activeSelection.width, activeSelection.height, fabric)
-      loadedGradient.reset = true
-      setGradient(loadedGradient)
-    }
-
-  }, [activeSelection])
-
-
-
-  const handleColorChange = (color) => {
-    setColor(`rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`)
-
-    activeSelection.set('fill', `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`)
-    canvas.renderAll()
-
-    delayedAction(1200, () => {
-      canvas.trigger('object:modified')
-    })
-  }
-
-
-  const handleGradientChange = (gradient) => {
-    let fabricGrad = stateObjToGrad(gradient, activeSelection.width, activeSelection.height, fabric)
-    activeSelection.set('fill', fabricGrad)
-
-    let updatedGradient = {...gradient, reset: false}
-    setGradient(updatedGradient)
-
-    canvas.renderAll()
-
-    delayedAction(1200, () => {
-      canvas.trigger('object:modified')
-    })
-  }
-
-
-  return (
-    <Tabs defaultTab={activeSelection.fill && activeSelection.fill.colorStops ? 'gradient' : 'color'}>
-      <Tab title={__('Color fill')} name="color">
-        <ChromePicker width="100%" color={color} onChange={handleColorChange} />
-      </Tab>
-      <Tab title={__('Gradient fill')} name="gradient">
-        <GradientPicker gradient={gradient} onChange={handleGradientChange}>
-          <ChromePicker />
-        </GradientPicker>
-      </Tab>
-    </Tabs>
-  )
+    return (
+        <div>
+            {activeSelection && (
+                <div className="setting">
+                    <div className="label">{__('Fill color')}</div>
+                    <div className="function">
+                        <input
+                            type="color"
+                            value={fillColor}
+                            onChange={handleInputChange}
+                        />
+                        {swatches.map((color, index) => (
+                            <div 
+                                key={index}
+                                className="color-swatch"
+                                style={{ backgroundColor: color }}
+                                onClick={() => handleColorChange(color)}
+                            ></div>
+                        ))}
+                    </div>
+                </div>
+            )}
+            {activeSelection && activeSelection.type === 'group' && (
+                <button onClick={ungroup}>{__('Ungroup paths')}</button>
+            )}
+        </div>
+    );
 }
 
-export default SelectionColorSettings
+export default SelectionColorSettings;
