@@ -11,6 +11,7 @@ import demoContent from './../utils/demoContent';
 import './FabricCanvas.scss';
 
 
+
 const FabricCanvas = (props) => {
 
   // init fabric canvas once
@@ -227,6 +228,17 @@ fabric.Object.prototype.padding = 0;
       }
     </div>
   )
+
+function handlePredefinedColorSelect(color) {
+    const activeObjects = fabricCanvas.getActiveObjects();
+    
+    activeObjects.forEach(object => {
+        object.set('fill', color);
+    });
+
+    fabricCanvas.renderAll();
+}
+
 
 }
 
