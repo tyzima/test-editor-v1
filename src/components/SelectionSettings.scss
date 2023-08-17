@@ -38,17 +38,23 @@
     display: inline-block;
   }
 
-  .color-swatch {
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-    margin-right: 5px;
-    cursor: pointer;
-    border: 1px solid #cccccc;
-}
+  .color-settings {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-.color-swatch:hover {
-    border: 1px solid #000000;
+    .color-swatch {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .color-display {
+            width: 25px;
+            height: 25px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    }
 }
 
 }
