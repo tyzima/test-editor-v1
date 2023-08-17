@@ -1,57 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-const SelectionColorSettings = ({ canvas, activeSelection }) => {
-    const [detectedColors, setDetectedColors] = useState([]);
+const SelectionColorSettings = (props) => {
+    const { canvas } = props;
 
-    // Extract distinct colors from the selected object
-    const extractColors = (object) => {
-        let colors = [];
-        if (object.type === 'group') {
-            object._objects.forEach(subObject => {
-                if (subObject.fill && !colors.includes(subObject.fill)) {
-                    colors.push(subObject.fill);
+    const swatches = [
+        { name: "White", color: "#ffffff" },
+        { name: "Grey", color: "#a2a9ad" },
+        // ... add the rest of your colors here.
+    ];
+
+    const handleColorChange = (color) => {
+        if (canvas) {
+            const activeObject = canvas.getActiveObject();
+            if (activeObject) {
+                if (activeObject.type === "group") {
+                    const items = activeObject.getObjects();
+                    items.forEach(item => {
+                        item.set({ fill: color });
+                    });
+                } else {
+                    activeObject.set({ fill: color });
                 }
-            });
-        } else {
-            if (object.fill) {
-                colors.push(object.fill);
+                canvas.requestRenderAll();
             }
         }
-        setDetectedColors(colors);
-    };
-
-    useEffect(() => {
-        if (activeSelection) {
-            extractColors(activeSelection);
-        }
-    }, [activeSelection]);
-
-    const handleColorChange = (originalColor, newColor) => {
-        if (activeSelection.type === 'group') {
-            activeSelection._objects.forEach(subObject => {
-                if (subObject.fill === originalColor) {
-                    subObject.set('fill', newColor);
-                }
-            });
-        } else {
-            if (activeSelection.fill === originalColor) {
-                activeSelection.set('fill', newColor);
-            }
-        }
-        canvas.renderAll();
-        canvas.trigger('object:modified');
     };
 
     return (
-        <div className="color-settings">
-            {detectedColors.map(color => (
-                <div key={color} className="color-swatch">
-                    <div className="color-display" style={{ backgroundColor: color }}></div>
-                    <input type="color" value={color} onChange={(e) => handleColorChange(color, e.target.value)} />
+        <div className="svg-editor">
+            <div className="edit-option">
+                <div className="item-color-menu selectedOption">
+                    <div className="colors">
+                        <div>LOGO COLORS</div>
+                        <ul id="item-color-list">
+                            {swatches.map((swatch, index) => (
+                                <li
+                                    key={index}
+                                    style={{ backgroundColor: swatch.color }}
+                                    onClick={() => handleColorChange(swatch.color)}
+                                >
+                                    {/* Tooltip or title for color name */}
+                                    <span title={swatch.name}></span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="change-colors">
+                        <div>CUSTOM COLOR</div>
+                        <div className="color-input">
+                            <input
+                                id="color-input"
+                                type="color"
+                                onChange={(e) => handleColorChange(e.target.value)}
+                            />
+                        </div>
+                    </div>
                 </div>
-            ))}
+            </div>
         </div>
     );
-}
+};
 
 export default SelectionColorSettings;
