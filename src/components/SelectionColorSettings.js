@@ -9,22 +9,15 @@ const SelectionColorSettings = (props) => {
         // ... add the rest of your colors here.
     ];
 
-    const handleColorChange = (color) => {
-        if (canvas) {
-            const activeObject = canvas.getActiveObject();
-            if (activeObject) {
-                if (activeObject.type === "group") {
-                    const items = activeObject.getObjects();
-                    items.forEach(item => {
-                        item.set({ fill: color });
-                    });
-                } else {
-                    activeObject.set({ fill: color });
-                }
-                canvas.requestRenderAll();
-            }
-        }
-    };
+  const handleColorChange = (color) => {
+    if (canvas) {
+        const activeObjects = canvas.getActiveObjects();  // This gets all active objects, even if it's just one.
+        activeObjects.forEach(object => {
+            object.set({ fill: color });
+        });
+        canvas.requestRenderAll();
+    }
+};
 
     return (
         <div className="svg-editor">
