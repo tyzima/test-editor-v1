@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { fabric } from 'fabric';
-
 import __ from './../utils/translation';
 
 const SelectionColorSettings = ({ canvas, activeSelection }) => {
