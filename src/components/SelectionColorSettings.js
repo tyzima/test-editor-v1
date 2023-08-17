@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import __ from './../utils/translation';
 
 const SelectionColorSettings = ({ canvas, activeSelection }) => {
     const [detectedColors, setDetectedColors] = useState([]);
