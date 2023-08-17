@@ -1,43 +1,57 @@
+import React from 'react';
 
-import React, { useState, useContext } from "react";
-import { FabricContext } from "./FabricContext";
-import { predefinedColors } from "./colorArray";
+const SelectionColorSettings = (props) => {
+    const { canvas } = props;
 
-function SelectionColorSettings() {
-    const [fabricCanvas, setFabricCanvas] = useContext(FabricContext);
-    const [selectedColor, setSelectedColor] = useState("");
+    const swatches = [
+        { name: "White", color: "#ffffff" },
+        { name: "Grey", color: "#a2a9ad" },
+        // ... add the rest of your colors here.
+    ];
 
-    const handleColorChange = (color) => {
-        setSelectedColor(color);
-        if (fabricCanvas) {
-            const activeObjects = fabricCanvas.getActiveObjects();
-            activeObjects.forEach(obj => {
-                if (obj.setFill) {
-                    obj.setFill(color);
-                    fabricCanvas.renderAll();
-                }
-            });
-        }
-    };
+  const handleColorChange = (color) => {
+    if (canvas) {
+        const activeObjects = canvas.getActiveObjects();  // This gets all active objects, even if it's just one.
+        activeObjects.forEach(object => {
+            object.set({ fill: color });
+        });
+        canvas.requestRenderAll();
+    }
+};
 
     return (
-        <div className="setting">
-            <div className="label">Color</div>
-            <div className="function">
-                <div className="predefined-colors">
-                    {predefinedColors.map((colorObj) => (
-                        <div
-                            key={colorObj.name}
-                            className="color-swatch"
-                            style={{ backgroundColor: colorObj.color }}
-                            onClick={() => handleColorChange(colorObj.color)}
-                            title={colorObj.name}
-                        ></div>
-                    ))}
+        <div className="svg-editor">
+            <div className="edit-option">
+                <div className="item-color-menu selectedOption">
+                    <div className="colors">
+                        <div>LOGO COLORS</div>
+                        <ul id="item-color-list">
+                            {swatches.map((swatch, index) => (
+                                <li
+                                    key={index}
+                                    style={{ backgroundColor: swatch.color }}
+                                    onClick={() => handleColorChange(swatch.color)}
+                                >
+                                    {/* Tooltip or title for color name */}
+                                    <span title={swatch.name}></span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="change-colors">
+                        <div>CUSTOM COLOR</div>
+                        <div className="color-input">
+                            <input
+                                id="color-input"
+                                type="color"
+                                onChange={(e) => handleColorChange(e.target.value)}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default SelectionColorSettings;
